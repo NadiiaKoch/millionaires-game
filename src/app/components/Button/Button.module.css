@@ -1,0 +1,41 @@
+.button {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16.24px;
+  text-align: center;
+  background-color: #ff8b37;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-height: 48px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.button:hover {
+  background-color: #ffac70;
+}
+
+.button:active {
+  background-color: #e87928;
+}
+
+@media (min-width: 768px) {
+  .button {
+    font-size: 20px;
+    padding: 12px 24px;
+    max-width: 240px;
+    border-radius: 12px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .button {
+    height: 64px;
+    max-width: 296px;
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the capital of France?",
+      "answers": [
+        { "id": 1, "text": "Paris" },
+        { "id": 2, "text": "London" },
+        { "id": 3, "text": "Berlin" },
+        { "id": 4, "text": "Madrid" }
+      ],
+      "correct": [1],
+      "prize": 500
+    },
+    {
+      "id": 2,
+      "question": "Which planet is known as the Red Planet?",
+      "answers": [
+        { "id": 1, "text": "Earth" },
+        { "id": 2, "text": "Mars" },
+        { "id": 3, "text": "Jupiter" },
+        { "id": 4, "text": "Saturn" }
+      ],
+      "correct": [2],
+      "prize": 1000
+    },
+    {
+      "id": 3,
+      "question": "What is the largest ocean on Earth?",
+      "answers": [
+        { "id": 1, "text": "Atlantic" },
+        { "id": 2, "text": "Indian" },
+        { "id": 3, "text": "Pacific" },
+        { "id": 4, "text": "Southern" }
+      ],
+      "correct": [3],
+      "prize": 2000
+    },
+    {
+      "id": 4,
+      "question": "Which language is the most spoken worldwide?",
+      "answers": [
+        { "id": 1, "text": "English" },
+        { "id": 2, "text": "Mandarin" },
+        { "id": 3, "text": "Spanish" },
+        { "id": 4, "text": "Hindi" }
+      ],
+      "correct": [2],
+      "prize": 4000
+    },
+    {
+      "id": 5,
+      "question": "Who wrote 'To be, or not to be'?",
+      "answers": [
+        { "id": 1, "text": "Shakespeare" },
+        { "id": 2, "text": "Dickens" },
+        { "id": 3, "text": "Rowling" },
+        { "id": 4, "text": "Twain" }
+      ],
+      "correct": [1],
+      "prize": 8000
+    },
+    {
+      "id": 6,
+      "question": "What is the smallest country in the world by land area?",
+      "answers": [
+        { "id": 1, "text": "Monaco" },
+        { "id": 2, "text": "Vatican City" },
+        { "id": 3, "text": "San Marino" },
+        { "id": 4, "text": "Liechtenstein" }
+      ],
+      "correct": [2],
+      "prize": 16000
+    },
+    {
+      "id": 7,
+      "question": "What is the chemical symbol for gold?",
+      "answers": [
+        { "id": 1, "text": "Au" },
+        { "id": 2, "text": "Ag" },
+        { "id": 3, "text": "Pb" },
+        { "id": 4, "text": "Fe" }
+      ],
+      "correct": [1],
+      "prize": 32000
+    },
+    {
+      "id": 8,
+      "question": "Which artist painted the Mona Lisa?",
+      "answers": [
+        { "id": 1, "text": "Vincent van Gogh" },
+        { "id": 2, "text": "Pablo Picasso" },
+        { "id": 3, "text": "Leonardo da Vinci" },
+        { "id": 4, "text": "Claude Monet" }
+      ],
+      "correct": [3],
+      "prize": 64000
+    },
+    {
+      "id": 9,
+      "question": "Which country is known as the Land of the Rising Sun?",
+      "answers": [
+        { "id": 1, "text": "China" },
+        { "id": 2, "text": "Japan" },
+        { "id": 3, "text": "South Korea" },
+        { "id": 4, "text": "Thailand" }
+      ],
+      "correct": [2],
+      "prize": 125000
+    },
+    {
+      "id": 10,
+      "question": "What is the longest river in the world?",
+      "answers": [
+        { "id": 1, "text": "Amazon" },
+        { "id": 2, "text": "Nile" },
+        { "id": 3, "text": "Yangtze" },
+        { "id": 4, "text": "Mississippi" }
+      ],
+      "correct": [2],
+      "prize": 250000
+    },
+    {
+      "id": 11,
+      "question": "Which gas is most abundant in Earth's atmosphere?",
+      "answers": [
+        { "id": 1, "text": "Oxygen" },
+        { "id": 2, "text": "Carbon Dioxide" },
+        { "id": 3, "text": "Nitrogen" },
+        { "id": 4, "text": "Hydrogen" }
+      ],
+      "correct": [3],
+      "prize": 500000
+    },
+    {
+      "id": 12,
+      "question": "In what year did the Titanic sink?",
+      "answers": [
+        { "id": 1, "text": "1912" },
+        { "id": 2, "text": "1905" },
+        { "id": 3, "text": "1898" },
+        { "id": 4, "text": "1920" }
+      ],
+      "correct": [1],
+      "prize": 1000000
+    }
+  ]
+}

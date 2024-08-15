@@ -1,95 +1,65 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+import React, { useState } from 'react';
+import StartScreen from './components/StartScreen/StartScreen';
+import Question from './components/Question/Question';
+import FinalScreen from './components/FinalScreen/FinalScreen';
+import questionsData from '../data/questions.json';
+import Sidebar from './components/Sidebar/Sidebar';
+import styles from './page.module.css';
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+export default function HomePage() {
+  const [gameStarted, setGameStarted] = useState(false);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handleStart = () => {
+    setGameStarted(true);
+  };
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleAnswer = (isCorrect: boolean) => {
+    if (isCorrect) {
+      if (currentQuestionIndex < questionsData.questions.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+      } else {
+        setIsGameOver(true);
+      }
+    } else {
+      setIsGameOver(true);
+    }
+  };
+
+  const prizeAmount = isGameOver && currentQuestionIndex > 0
+    ? Number(questionsData.questions[currentQuestionIndex - 1].prize)
+    : 0;
+
+  let content;
+
+  if (!gameStarted) {
+    content = <StartScreen onStart={handleStart} />;
+  } else if (isGameOver) {
+    content = <FinalScreen prize={prizeAmount} />;
+  } else {
+    content = (
+      <div className={styles.main}>
+        <Sidebar
+          currentQuestionIndex={currentQuestionIndex}
+          isOpen={isSidebarOpen}
+          onClose={toggleSidebar}
+        />
+        <Question
+          question={questionsData.questions[currentQuestionIndex]}
+          onAnswer={handleAnswer}
+          toggleSidebar={toggleSidebar}
         />
       </div>
+    );
+  }
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+  return <div>{content}</div>;
 }

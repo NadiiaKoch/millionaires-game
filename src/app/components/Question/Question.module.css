@@ -1,0 +1,149 @@
+.answerScreen {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  height: 100vh;
+  padding: 120px 20px 20px;
+  gap: 20%;
+}
+
+.answerScreenTitle {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20.88px;
+  text-align: center;
+}
+
+.menuToggle {
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.menuToggle:hover {
+  transform: scale(1.2);
+}
+
+.answerContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.answerButton {
+  width: 100%;
+  max-width: 288px;
+  padding-left: 35px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+  color: #000;
+  border: none;
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  height: 52px;
+}
+
+.answerButton::before {
+  position: absolute;
+  display: block;
+  content: "";
+  border-top: 0.5px solid #d0d0d8;
+  top: 50%;
+  height: 100%;
+  z-index: 0;
+  left: 0;
+  right: 0;
+}
+
+.answerButtonBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 1;
+}
+
+.answerButton.inactive .answerButtonBackground {
+  background-image: url("/images/inactive.svg");
+}
+
+.answerButton.select .answerButtonBackground {
+  background-image: url("/images/selected.svg");
+}
+
+.answerButton.correct .answerButtonBackground {
+  background-image: url("/images/correct.svg");
+}
+
+.answerButton.wrong .answerButtonBackground {
+  background-image: url("/images/wrong.svg");
+}
+
+.answerButton:hover:not(:disabled) .answerButtonBackground {
+  background-image: url("/images/hover.svg");
+}
+
+.answerButton:disabled .answerButtonBackground {
+  cursor: not-allowed;
+}
+
+.answerLetter {
+  font-weight: bold;
+  color: #ff8b37;
+  margin-right: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.answerText {
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .answerContainer .answerButton:nth-child(odd):last-child {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .menuToggle {
+    display: none;
+  }
+
+  .answerScreenTitle {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 37.12px;
+    text-align: left;
+  }
+
+  .answerButton {
+    max-width: 420px;
+    height: 72px;
+    width: calc(50% - 20px);
+    padding-left: 60px;
+  }
+}
