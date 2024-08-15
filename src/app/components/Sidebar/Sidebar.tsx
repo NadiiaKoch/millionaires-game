@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import styles from './Sidebar.module.css';
 import questionsData from '../../../data/questions.json';
 import formatCurrency from '../../shared/utils/formatCurrency';
@@ -19,7 +20,7 @@ function Sidebar({
   return (
     <div className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
       <button type="button" className={styles.closeSidebar} onClick={onClose}>
-        <img src={closeIcon} alt="Close Sidebar" />
+        <Image width={24} height={24} src={closeIcon} alt="Close Sidebar" />
       </button>
       <ul className={styles.sidebarList}>
         {questionsData.questions.map((question, index) => {

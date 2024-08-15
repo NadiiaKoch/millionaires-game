@@ -6,7 +6,7 @@ interface ButtonProps {
   label: string;
 }
 
-function Button({ onClick, label }: ButtonProps): JSX.Element {
+function Button({ onClick, label }: ButtonProps) {
   return (
     <button type="button" onClick={onClick} className={styles.button}>
       {label}

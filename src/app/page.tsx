@@ -38,28 +38,24 @@ export default function HomePage() {
     ? Number(questionsData.questions[currentQuestionIndex - 1].prize)
     : 0;
 
-  let content;
-
   if (!gameStarted) {
-    content = <StartScreen onStart={handleStart} />;
-  } else if (isGameOver) {
-    content = <FinalScreen prize={prizeAmount} />;
-  } else {
-    content = (
-      <div className={styles.main}>
-        <Sidebar
-          currentQuestionIndex={currentQuestionIndex}
-          isOpen={isSidebarOpen}
-          onClose={toggleSidebar}
-        />
-        <Question
-          question={questionsData.questions[currentQuestionIndex]}
-          onAnswer={handleAnswer}
-          toggleSidebar={toggleSidebar}
-        />
-      </div>
-    );
+    return <StartScreen onStart={handleStart} />;
   }
-
-  return <div>{content}</div>;
+  if (isGameOver) {
+    return <FinalScreen prize={prizeAmount} />;
+  }
+  return (
+    <div className={styles.main}>
+      <Sidebar
+        currentQuestionIndex={currentQuestionIndex}
+        isOpen={isSidebarOpen}
+        onClose={toggleSidebar}
+      />
+      <Question
+        question={questionsData.questions[currentQuestionIndex]}
+        onAnswer={handleAnswer}
+        toggleSidebar={toggleSidebar}
+      />
+    </div>
+  );
 }

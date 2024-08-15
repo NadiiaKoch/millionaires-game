@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import styles from './Question.module.css';
 
 const menuIcon = '/images/menu.svg';
+const alphabet = ['A', 'B', 'C', 'D', 'E', 'F'];
 
 interface Answer {
   id: number;
   text: string;
 }
 
+interface SingleQuestion {
+  question: string;
+  answers: Answer[];
+  correct: number[];
+}
+
 interface QuestionProps {
-  question: {
-    question: string;
-    answers: Answer[];
-    correct: number[];
-  };
+  question: SingleQuestion;
   onAnswer: (isCorrect: boolean) => void;
   toggleSidebar: () => void;
 }
@@ -24,6 +28,7 @@ function Question({ question, onAnswer, toggleSidebar }: QuestionProps) {
   const [highlightedAnswer, setHighlightedAnswer] = useState<number | null>(
     null,
   );
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setSelectedAnswers([]);
@@ -32,38 +37,47 @@ function Question({ question, onAnswer, toggleSidebar }: QuestionProps) {
   }, [question]);
 
   const handleAnswerClick = (id: number) => {
-    if (!submitted) {
-      setHighlightedAnswer(id);
-
-      setTimeout(() => {
-        const isCorrect = question.correct.includes(id);
-        setSelectedAnswers((prev) => [...prev, id]);
-        setHighlightedAnswer(null);
-
-        if (selectedAnswers.length + 1 === question.correct.length
-          || !isCorrect) {
-          setSubmitted(true);
-          setTimeout(() => {
-            onAnswer(isCorrect);
-          }, 1000);
-        }
-      }, 500);
+    if (submitted) {
+      return;
     }
+    setHighlightedAnswer(id);
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      const isCorrect = question.correct.includes(id);
+      setSelectedAnswers((prev) => [...prev, id]);
+      setHighlightedAnswer(null);
+
+      if (selectedAnswers.length + 1 === question.correct.length
+        || !isCorrect) {
+        setSubmitted(true);
+        timeoutRef.current = setTimeout(() => {
+          onAnswer(isCorrect);
+        }, 1000);
+      }
+    }, 500);
   };
+
+  const handleClick = (id: number) => () => handleAnswerClick(id);
 
   const getAnswerClassName = (id: number) => {
     if (highlightedAnswer === id) {
       return styles.select;
     }
-
     if (selectedAnswers.includes(id)) {
-      return question.correct.includes(id) ? styles.correct : styles.wrong;
+      if (question.correct.includes(id)) {
+        return styles.correct;
+      }
+      return styles.wrong;
     }
-
+    if (submitted && question.correct.includes(id)) {
+      return styles.correct;
+    }
     return styles.inactive;
   };
-
-  const alphabet = ['A', 'B', 'C', 'D', 'E', 'F'];
 
   return (
     <div className={styles.answerScreen}>
@@ -72,15 +86,15 @@ function Question({ question, onAnswer, toggleSidebar }: QuestionProps) {
         className={styles.menuToggle}
         onClick={toggleSidebar}
       >
-        <img src={menuIcon} alt="Menu Toggle Icon" />
+        <Image width={24} height={24} src={menuIcon} alt="Menu Toggle Icon" />
       </button>
-      <h1 className={styles.answerScreenTitle}>{question.question}</h1>
+      <h2 className={styles.answerScreenTitle}>{question.question}</h2>
       <div className={styles.answerContainer}>
         {question.answers.map((answer, index) => (
           <button
             key={answer.id}
             type="button"
-            onClick={() => handleAnswerClick(answer.id)}
+            onClick={handleClick(answer.id)}
             className={`${styles.answerButton} ${getAnswerClassName(
               answer.id,
             )}`}

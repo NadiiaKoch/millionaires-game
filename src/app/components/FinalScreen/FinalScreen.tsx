@@ -9,17 +9,21 @@ interface FinalScreenProps {
 }
 
 function FinalScreen({ prize }: FinalScreenProps) {
+  const handleTryAgain = () => {
+    window.location.reload();
+  };
+
   return (
     <div className={styles.finalScreen}>
       <div className={styles.finalContent}>
         <HandIcon />
         <div className={styles.finalText}>
-          <h1 className={styles.finalTitle}>Total score:</h1>
+          <h2 className={styles.finalTitle}>Total score:</h2>
           <p className={styles.finalPrize}>
             {formatCurrency(prize)}
             <span> earned</span>
           </p>
-          <Button onClick={() => window.location.reload()} label="Try again" />
+          <Button onClick={handleTryAgain} label="Try again" />
         </div>
       </div>
     </div>
